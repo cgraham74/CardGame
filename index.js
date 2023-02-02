@@ -1,5 +1,5 @@
 const player = {
-  name: "Player 1",
+  name: "Player Name",
   chips: 145,
 }
 let cards = [];

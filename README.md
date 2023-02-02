@@ -1,22 +1,22 @@
 # CardGame
+
 This is a fully functioning Blackjack card game.
 
 Created with JavaScript, HTML, and CSS.
 
-My learning goal:
----
+## My learning goal:
+
 1.) Strengthen skills by practicing every day.
 
 2.) Develop and implement new functionality beyond the base project.
 
-3.) Practice UX/UI with the user in mind. 
+3.) Practice UX/UI with the user in mind.
 
+## My feature implementation goal:
 
-My feature implementation goal:
----
 1.) Create a deck of cards to replace the numerical representation.
 
-2.) Update the look of the game board graphic. 
+2.) Update the look of the game board graphic.
 
 3.) Replace the hard-coded values for player and chips by prompting the user for input.
 
@@ -26,11 +26,11 @@ My feature implementation goal:
 
 6.) Create and add graphical chip representation that will increase and decrease based on win/loss.
 
-
 ### Original Project
-The original project is part of the Scrimba frontend development course. 
 
-This is a great beginner project where the focus is learning to create 
+The original project is part of the Scrimba frontend development course.
+
+This is a great beginner project where the focus is learning to create
 and manipulate arrays and objects in a JavaScript application.
 
 The player and chip amount is hard coded and the overall design is overly simplistic (terrible).
