@@ -35,4 +35,5 @@ and manipulate arrays and objects in a JavaScript application.
 
 The player and chip amount is hard coded and the overall design is overly simplistic (terrible).
 
-![image](https://user-images.githubusercontent.com/18030411/216362496-c9669ff1-dcb8-40c2-8fd8-50efd0f7bbe0.png)
+![image](https://user-images.githubusercontent.com/18030411/216395657-c5172822-dc81-4ee8-b731-e67bbf5d8f3d.png)
+
