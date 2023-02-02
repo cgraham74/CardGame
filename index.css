@@ -1,0 +1,31 @@
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
+    background-image: url(black_jack_board.PNG);
+    background-size: cover;
+    text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+    color: white;
+}
+
+h1{
+    color: goldenrod;
+}
+button{
+    color: #016f32;
+    width: 150px;
+    background: goldenrod;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.btn-start:hover{
+    background: rgb(236, 181, 39);
+}
+#messageEL {
+    font-style: italic;
+}
