@@ -1,0 +1,22 @@
+{
+  "name": "scrimba_2023_blackjack",
+  "version": "1.0.0",
+  "description": "Blackjack card game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cgraham74/CardGame.git"
+  },
+  "keywords": [
+    "Blackjack"
+  ],
+  "author": "Christina Graham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cgraham74/CardGame/issues"
+  },
+  "homepage": "https://github.com/cgraham74/CardGame#readme"
+}
