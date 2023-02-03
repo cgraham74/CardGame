@@ -1,7 +1,8 @@
 const player = {
-  name: "Player Name",
-  chips: 145,
+  name: "Player",
+  chips: 0,
 };
+
 const cardType = ["Club", "Diamond", "Spade", "Heart"];
 const faceCard = ["King", "Queen", "Jack"];
 let cards = [];
@@ -16,7 +17,30 @@ let playerEl = document.getElementById("player-el");
 let cardDisplayEl = document.querySelector(".cardDisplay");
 let cardImage;
 
+
 playerEl.textContent = player.name + ": $" + player.chips;
+
+function getPlayerName(){
+// Create input box to get players Name
+}
+
+function betMoney(){
+// Bets in increments of 5
+// if user wins - increase player's chips by 5
+// TODO allow user option to bet more
+  return 5;
+}
+
+
+function playerHold(){
+//Allow player to hold if they do not want anymore cards
+// and then pass the turn to the dealer
+}
+
+function dealerPlay(){
+// Dealer deals 2 cards.
+}
+
 
 function getRandomCard() {
   let randomNum = Math.floor(Math.random() * 13) + 1;
@@ -39,6 +63,8 @@ function getRandomCard() {
 
 function startGame() {
   isAlive = true;
+  player.chips -= betMoney();
+  playerEl.textContent = player.name + ": $" + player.chips;
   let firstCard = getRandomCard();
   let secondCard = getRandomCard();
   cards = [firstCard, secondCard];
@@ -58,6 +84,9 @@ function renderGame() {
     message = "Do you want to draw another card?";
   } else if (sum === 21) {
     message = "BlackJack!";
+
+    player.chips += betMoney() * 2;
+    playerEl.textContent = player.name + ": $" + player.chips;
     hasBlackJack = true;
   } else {
     message = "Busted!";

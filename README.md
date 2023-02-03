@@ -14,9 +14,9 @@ Created with JavaScript, HTML, and CSS.
 
 ## My feature implementation goal:
 
-1.) Create a deck of cards to replace the numerical representation.
+1.) Create a deck of cards to replace the numerical representation.(done)
 
-2.) Update the look of the game board graphic.
+2.) Update the look of the game board graphic. (done)
 
 3.) Replace the hard-coded values for player and chips by prompting the user for input.
 
