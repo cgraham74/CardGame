@@ -37,3 +37,8 @@ The player and chip amount is hard coded and the overall design is overly simpli
 
 ![image](https://user-images.githubusercontent.com/18030411/216395657-c5172822-dc81-4ee8-b731-e67bbf5d8f3d.png)
 
+
+### Current Progress
+I've refactored the code to replace the numerical card representation with newly created card images.
+
+![image](https://user-images.githubusercontent.com/18030411/216712770-019993ac-480e-4fcc-9f77-ba2ba477e482.png)
