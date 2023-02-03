@@ -1,6 +1,6 @@
 body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
-    background-image: url(black_jack_board.PNG);
+    background-image: url(images/felt.PNG);
     background-size: cover;
     text-align: center;
     font-weight: bold;
@@ -28,4 +28,8 @@ button{
 }
 #messageEL {
     font-style: italic;
+}
+.card{
+    width: 75px; 
+    height: 100px;   
 }
