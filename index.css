@@ -16,9 +16,10 @@ body{
     background-image: url(images/felt.PNG);
     background-size: contain;
     padding: 30px;
-    border-radius: 5px;
+ 
     margin-top: 10px;
-   
+    border: 15px solid transparent;
+    border-image: url(images/black_jack_footer.png) 100 round;
 }
 p{
     margin: 5px;
@@ -43,7 +44,7 @@ img{
     border-radius: 5px;
     border-radius: 5px;
     min-height: 150px;
-    
+ 
 }
 h1{
     color: goldenrod;
