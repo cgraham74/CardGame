@@ -72,13 +72,17 @@ function startGame() {
   renderGame();
 }
 
-function renderGame() {
-  cardsEl.textContent = "Cards: ";
+function displayCards(){
   cardDisplayEl.innerHTML = "";
   for (let i = 0; i < cards.length; i++) {
     cardDisplayEl.innerHTML +=
       "<img src='images/cards/" + cards[i][1] + ".png' class='card' />";
   }
+}
+
+function renderGame() {
+  cardsEl.textContent = "Cards: ";
+  displayCards()
   sumEl.textContent = "Points: " + sum;
   if (sum <= 20) {
     message = "Do you want to draw another card?";
