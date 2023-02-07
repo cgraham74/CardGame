@@ -14,7 +14,7 @@ let messageEl = document.getElementById("message-el");
 let sumEl = document.getElementById("sum-el");
 let cardsEl = document.getElementById("cards-el");
 let playerEl = document.getElementById("player-el");
-let cardDisplayEl = document.querySelector(".cardDisplay");
+let cardDisplayEl = document.querySelector(".player-card-container");
 let cardImage;
 
 
@@ -73,10 +73,11 @@ function startGame() {
 }
 
 function displayCards(){
-  cardDisplayEl.innerHTML = "";
+  cardDisplayEl.innerHTML = ""; 
   for (let i = 0; i < cards.length; i++) {
     cardDisplayEl.innerHTML +=
-      "<img src='images/cards/" + cards[i][1] + ".png' class='card' />";
+      "<img src='images/cards/" + cards[i][1] + ".png' class='card' id='card"+i+"'/>";
+      rotateCards("card"+i);
   }
 }
 
@@ -84,18 +85,16 @@ function renderGame() {
   cardsEl.textContent = "Cards: ";
   displayCards()
   sumEl.textContent = "Points: " + sum;
-  if (sum <= 20) {
     message = "Do you want to draw another card?";
+  if (sum > 21) {
+    message = "Busted!";
+    isAlive = false;
   } else if (sum === 21) {
     message = "BlackJack!";
-
     player.chips += betMoney() * 2;
     playerEl.textContent = player.name + ": $" + player.chips;
     hasBlackJack = true;
-  } else {
-    message = "Busted!";
-    isAlive = false;
-  }
+  } 
   messageEl.textContent = message;
 }
 
@@ -106,4 +105,12 @@ function newCard() {
     cards.push(newCard);
     renderGame();
   }
+}
+
+function randomNum(min, max){
+return Math.random() * (max - min) + min;
+}
+function rotateCards(cardId){
+  let deg = Math.floor(randomNum(-20, 20));
+  let card = document.getElementById(cardId).style.transform = 'rotate(' + deg + 'deg)';
 }
