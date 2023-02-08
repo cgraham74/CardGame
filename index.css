@@ -37,7 +37,7 @@ img {
   justify-content: center;
   align-items: center;
 }
-.player-card-container {
+.player-card-container, .dealer-card-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,6 +49,7 @@ img {
   
 }
 
+
 .card{
   width: 80px;
   transform: rotate(var(--num));
@@ -56,7 +57,9 @@ img {
 
 h1 {
   color: goldenrod;
+  margin-top: 0;
 }
+
 button {
   color: #016f32;
   width: 150px;
