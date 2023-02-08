@@ -36,7 +36,6 @@ if (player.name === null){
 }
 playerEl.textContent = player.name + ": $" + player.chips;
 
-
 /**
  * Begins game when Start Game button is clicked
  * Player's bet is deducted from sum
@@ -169,13 +168,14 @@ function dealerTurn(){
     newDealerCard = getRandomCard();
     dealerCards.push(newDealerCard);
     dealerSum += newDealerCard[0];
+ 
+  }
   if (dealerSum > playerSum && dealerSum <= 21){
     message = "Dealer Wins!"
-    break;
+   
   } else {
     player.chips += betMoney() * 2;
     message = player.name + " Wins!"
-  }
   } 
     renderGame(message);
   }
