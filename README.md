@@ -12,17 +12,17 @@ Created with JavaScript, HTML, and CSS.
 
 3.) Practice UX/UI with the user in mind.
 
-## My feature implementation goal:
+## My feature implementation goals:
 
 1.) Create a deck of cards to replace the numerical representation.(done)
 
 2.) Update the look of the game board graphic. (done)
 
-3.) Replace the hard-coded values for player and chips by prompting the user for input.
+3.) Replace the hard-coded values for player and chips by prompting the user for input.(done)
 
 4.) Add functionality to allow the user to bet chips per hand.
 
-5.) Add functionality to increase/decrease chip amount based on win/loss.
+5.) Add functionality to increase/decrease chip amount based on win/loss.(done)
 
 6.) Create and add graphical chip representation that will increase and decrease based on win/loss.
 
@@ -33,12 +33,13 @@ The original project is part of the Scrimba frontend development course.
 This is a great beginner project where the focus is learning to create
 and manipulate arrays and objects in a JavaScript application.
 
-The player and chip amount is hard coded and the overall design is overly simplistic (terrible).
+The player and chip amount is hard coded and the overall design is basic.
 
 ![image](https://user-images.githubusercontent.com/18030411/216395657-c5172822-dc81-4ee8-b731-e67bbf5d8f3d.png)
 
 
 ### Current Progress
-I've refactored the code to replace the numerical card representation with newly created card images.
 
-![image](https://user-images.githubusercontent.com/18030411/216712770-019993ac-480e-4fcc-9f77-ba2ba477e482.png)
+Can be seen at the Wiki
+
+https://github.com/cgraham74/CardGame/wiki
