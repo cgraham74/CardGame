@@ -5,16 +5,19 @@ const player = {
 
 const cardType = ["Club", "Diamond", "Spade", "Heart"];
 const faceCard = ["King", "Queen", "Jack"];
+let playerCards = [];
+let dealerCards = [];
 let cards = [];
 let sum;
 let hasBlackJack = false;
 let isAlive = false;
 let message = "";
-let messageEl = document.getElementById("message-el");
-let sumEl = document.getElementById("sum-el");
-let cardsEl = document.getElementById("cards-el");
-let playerEl = document.getElementById("player-el");
-let cardDisplayEl = document.querySelector(".player-card-container");
+const messageEl = document.getElementById("message-el");
+const sumEl = document.getElementById("sum-el");
+const cardsEl = document.getElementById("cards-el");
+const playerEl = document.getElementById("player-el");
+const playerCardsDisplayEl = document.querySelector(".player-card-container");
+const dealerDisplayEl = document.querySelector(".dealer-card-container");
 let cardImage;
 
 
@@ -38,6 +41,9 @@ function playerHold(){
 }
 
 function dealerPlay(){
+  let firstDealerCard = getRandomCard;
+  let secondDealerCard = getRandomCard;
+  console.log("dealers card "+firstDealerCard+ " "+ secondDealerCard)
 // Dealer deals 2 cards.
 }
 
@@ -73,9 +79,9 @@ function startGame() {
 }
 
 function displayCards(){
-  cardDisplayEl.innerHTML = ""; 
+  playerCardsDisplayEl.innerHTML = ""; 
   for (let i = 0; i < cards.length; i++) {
-    cardDisplayEl.innerHTML +=
+    playerCardsDisplayEl.innerHTML +=
       "<img src='images/cards/" + cards[i][1] + ".png' class='card' id='card"+i+"'/>";
       rotateCards("card"+i);
   }
@@ -83,7 +89,7 @@ function displayCards(){
 
 function renderGame() {
   cardsEl.textContent = "Cards: ";
-  displayCards()
+  displayCards();
   sumEl.textContent = "Points: " + sum;
     message = "Do you want to draw another card?";
   if (sum > 21) {
@@ -109,8 +115,9 @@ function newCard() {
 
 function randomNum(min, max){
 return Math.random() * (max - min) + min;
+
 }
 function rotateCards(cardId){
   let deg = Math.floor(randomNum(-20, 20));
-  let card = document.getElementById(cardId).style.transform = 'rotate(' + deg + 'deg)';
+  const card = document.getElementById(cardId).style.transform = 'rotate(' + deg + 'deg)';
 }
