@@ -11,6 +11,7 @@ let cards = [];
 let sum;
 let hasBlackJack = false;
 let isAlive = false;
+let isHold = false;
 let message = "";
 const messageEl = document.getElementById("message-el");
 const sumEl = document.getElementById("sum-el");
@@ -18,6 +19,7 @@ const cardsEl = document.getElementById("cards-el");
 const playerEl = document.getElementById("player-el");
 const playerCardsDisplayEl = document.querySelector(".player-card-container");
 const dealerDisplayEl = document.querySelector(".dealer-card-container");
+const playerHold = document.getElementById("player-hold-btn");
 let cardImage;
 
 
@@ -34,18 +36,13 @@ function betMoney(){
   return 5;
 }
 
-
-function playerHold(){
+playerHold.addEventListener("click", function(){
+  isHold = true
+  console.log({isHold})
+  return isHold
 //Allow player to hold if they do not want anymore cards
 // and then pass the turn to the dealer
-}
-
-function dealerPlay(){
-  let firstDealerCard = getRandomCard;
-  let secondDealerCard = getRandomCard;
-  console.log("dealers card "+firstDealerCard+ " "+ secondDealerCard)
-// Dealer deals 2 cards.
-}
+})
 
 
 function getRandomCard() {
@@ -67,16 +64,24 @@ function getRandomCard() {
   }
 }
 
+
+
 function startGame() {
   isAlive = true;
   player.chips -= betMoney();
   playerEl.textContent = player.name + ": $" + player.chips;
   let firstCard = getRandomCard();
   let secondCard = getRandomCard();
+
+  let firstDealerCard = getRandomCard();
+
+  dealerCards = [firstDealerCard];
   cards = [firstCard, secondCard];
   sum = firstCard[0] + secondCard[0];
   renderGame();
 }
+
+
 
 function displayCards(){
   playerCardsDisplayEl.innerHTML = ""; 
@@ -84,6 +89,12 @@ function displayCards(){
     playerCardsDisplayEl.innerHTML +=
       "<img src='images/cards/" + cards[i][1] + ".png' class='card' id='card"+i+"'/>";
       rotateCards("card"+i);
+  }
+  dealerDisplayEl.innerHTML ="";
+  for(let j = 0; j < dealerCards.length; j++){
+     dealerDisplayEl.innerHTML +=
+  "<img src='images/cards/" + dealerCards[j][1] + ".png' class='card' id='card"+j+"'/>";
+  rotateCards("card"+j);
   }
 }
 
@@ -103,12 +114,24 @@ function renderGame() {
   } 
   messageEl.textContent = message;
 }
+//Deal new card function that handles only dealing a card depending on if its
+//the player or dealer
+
+//Then render the game.
+
+//Check if Dealer or player for the RenderGame function. 
+//Maybe take in a parameter ?  renderGame(opponent)  opponent = player?  Dealer?  If player - do the player stuff.  if dealer
+//then score for dealer and dealer messages. 
 
 function newCard() {
   let newCard = getRandomCard();
-  if (isAlive && !hasBlackJack) {
+  if (isAlive && !hasBlackJack && !isHold) {
     sum += newCard[0];
     cards.push(newCard);
+    renderGame();
+  }
+  if (isAlive && isHold){
+    dealerCards.push(newCard);
     renderGame();
   }
 }
