@@ -1,9 +1,10 @@
 const player = {
   name: "Player",
-  chips: 0,
+  chips: 100,
 };
 
-player.name = prompt('What is your name?');
+player.name = prompt('Enter name...','Player');
+alert(`Welcome ${player.name}, you have been given $100 in credits`)
 
 const cardType = ["Club", "Diamond", "Spade", "Heart"];
 const faceCard = ["King", "Queen", "Jack"];
@@ -14,9 +15,10 @@ const playerSumEl = document.getElementById("player-sum-el");
 const cardsEl = document.getElementById("cards-el");
 const playerEl = document.getElementById("player-el");
 const playerCardsDisplayEl = document.querySelector(".player-card-container");
-const dealerDisplayEl = document.querySelector(".dealer-card-container");
+const dealerCardDisplayEl = document.querySelector(".dealer-card-container");
 const playerHold = document.getElementById("player-hold-btn");
 const newCardEl = document.getElementById("newcard-el");
+const dealerSumEl = document.getElementById("dealer-sum-el");
 
 let playerCards = [];
 let dealerCards = [];
@@ -29,11 +31,24 @@ let isHold = false;
 let message = "";
 let cardImage;
 
+if (player.name === null){
+  player.name = "Player";
+}
 playerEl.textContent = player.name + ": $" + player.chips;
 
 
+/**
+ * Begins game when Start Game button is clicked
+ * Player's bet is deducted from sum
+ * Player's name and new chip balance is displayed
+ * Cards are generated and stored in player (2 cards) and dealer (1 card) arrays
+ * Card sum is calculated for both player and dealer
+ * Game is rendered
+ */
 startGameEl.addEventListener("click", function(){
- isAlive = true;
+  isAlive = true;
+  hasBlackJack = false;
+  isHold = false;
   player.chips -= betMoney();
   playerEl.textContent = player.name + ": $" + player.chips;
   let firstCard = getRandomCard();
@@ -43,19 +58,13 @@ startGameEl.addEventListener("click", function(){
 
   let firstDealerCard = getRandomCard();
   dealerCards = [firstDealerCard];
-  dealerSum = dealerCards[0];
-  renderGame();
+  dealerSum = firstDealerCard[0];
 
+  renderGame("Do you want to draw another card?");
 })
 
-function getPlayerName(){
-// Create input box to get players Name
-}
 
 function betMoney(){
-// Bets in increments of 5
-// if user wins - increase player's chips by 5
-// TODO allow user option to bet more
   return 5;
 }
 
@@ -65,8 +74,7 @@ function betMoney(){
  */
 playerHold.addEventListener("click", function(){
   isHold = true
-  console.log({isHold})
-  return isHold
+  dealerTurn(); 
 })
 
 /**
@@ -102,61 +110,78 @@ function displayCards(){
       "<img src='images/cards/" + cards[i][1] + ".png' class='card' id='card"+i+"'/>";
       rotateCards("card"+i);
   }
-  dealerDisplayEl.innerHTML ="";
+  dealerCardDisplayEl.innerHTML ="";
   for(let j = 0; j < dealerCards.length; j++){
-     dealerDisplayEl.innerHTML +=
+    dealerCardDisplayEl.innerHTML +=
   "<img src='images/cards/" + dealerCards[j][1] + ".png' class='card' id='card"+j+"'/>";
   rotateCards("card"+j);
   }
 }
 
-function renderGame() {
+
+/**
+ * Renders the game
+ */
+function renderGame(message) {
+
   cardsEl.textContent = "Your cards: ";
   displayCards();
+  dealerSumEl.textContent = "Dealers Points: " + dealerSum;
   playerSumEl.textContent = "Points: " + playerSum;
-    message = "Do you want to draw another card?";
+  messageEl.textContent = message;
+}
+
+newCardEl.addEventListener("click", function(){
+   let newCard = getRandomCard();
+   if (playerSum < 21){
+    if (isAlive && !hasBlackJack && !isHold ) {
+    playerSum += newCard[0];
+    cards.push(newCard);
+    renderGame();
+    }
+   }
+   playersTurn();
+});
+
+function playersTurn(){
+  message = "Do you want to draw another card?";
   if (playerSum > 21) {
     message = "Busted!";
     isAlive = false;
-  } else if (playerSum === 21) {
+  } 
+   if (playerSum === 21) {
     message = "BlackJack!";
     player.chips += betMoney() * 2;
     playerEl.textContent = player.name + ": $" + player.chips;
     hasBlackJack = true;
   } 
-  messageEl.textContent = message;
+   renderGame(message);
+
 }
-//Deal new card function that handles only dealing a card depending on if its
-//the player or dealer
-
-//Then render the game.
-
-//Check if Dealer or player for the RenderGame function. 
-//Maybe take in a parameter ?  renderGame(opponent)  opponent = player?  Dealer?  If player - do the player stuff.  if dealer
-//then score for dealer and dealer messages. 
-
-newCardEl.addEventListener("click", function(){
-   let newCard = getRandomCard();
-  if (isAlive && !hasBlackJack && !isHold) {
-    playerSum += newCard[0];
-    cards.push(newCard);
-    renderGame();
-  }
-  if (isAlive && isHold){
-    //if is alive and ishold - dealers turn
-    dealerCards.push(newCard);
-    renderGame();
-  }
-});
-
-
+/**
+ * 
+ */
 function dealerTurn(){
-//Deal cards to dealer until the dealers score is above player's score or at 21. 
-//if dealers score above 21 - player wins.
-//if dealers score is 21 - dealer wins.
-//if dealers score is above players score and less than 21 - Dealer wins
+  dealerSumEl.textContent = "Dealers Points: " + dealerSum;
+  let newDealerCard;
+  if (isHold){
+  while (dealerSum < 21 ){
+    newDealerCard = getRandomCard();
+    dealerCards.push(newDealerCard);
+    dealerSum += newDealerCard[0];
+  if (dealerSum > playerSum && dealerSum <= 21){
+    message = "Dealer Wins!"
+    console.log("dealer>player && dealer <=21 "+ dealerSum + " " + playerSum)
+    break;
+  } else {
+    console.log("else: d: "+ dealerSum + " p: " + playerSum)
+    player.chips += betMoney() * 2;
+    message = player.name + " Wins!"
+  }
+  } 
+    renderGame(message);
+  }
 
-//render game
 }
 
 function randomNum(min, max){
@@ -167,3 +192,4 @@ function rotateCards(cardId){
   let deg = Math.floor(randomNum(-20, 20));
   const card = document.getElementById(cardId).style.transform = 'rotate(' + deg + 'deg)';
 }
+
