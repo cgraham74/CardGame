@@ -171,10 +171,8 @@ function dealerTurn(){
     dealerSum += newDealerCard[0];
   if (dealerSum > playerSum && dealerSum <= 21){
     message = "Dealer Wins!"
-    console.log("dealer>player && dealer <=21 "+ dealerSum + " " + playerSum)
     break;
   } else {
-    console.log("else: d: "+ dealerSum + " p: " + playerSum)
     player.chips += betMoney() * 2;
     message = player.name + " Wins!"
   }
