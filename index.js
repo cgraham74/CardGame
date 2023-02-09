@@ -3,8 +3,8 @@ const player = {
   chips: 100,
 };
 
-player.name = prompt('Enter name...','Player');
-alert(`Welcome ${player.name}, you have been given $100 in credits`)
+player.name = prompt("Enter name...", "Player");
+alert(`Welcome ${player.name}, you have been given $100 in credits`);
 
 const cardType = ["Club", "Diamond", "Spade", "Heart"];
 const faceCard = ["King", "Queen", "Jack"];
@@ -31,7 +31,7 @@ let isHold = false;
 let message = "";
 let cardImage;
 
-if (player.name === null){
+if (player.name === null) {
   player.name = "Player";
 }
 playerEl.textContent = player.name + ": $" + player.chips;
@@ -44,7 +44,7 @@ playerEl.textContent = player.name + ": $" + player.chips;
  * Card sum is calculated for both player and dealer
  * Game is rendered
  */
-startGameEl.addEventListener("click", function(){
+startGameEl.addEventListener("click", function () {
   isAlive = true;
   hasBlackJack = false;
   isHold = false;
@@ -60,10 +60,9 @@ startGameEl.addEventListener("click", function(){
   dealerSum = firstDealerCard[0];
 
   renderGame("Do you want to draw another card?");
-})
+});
 
-
-function betMoney(){
+function betMoney() {
   return 5;
 }
 
@@ -71,17 +70,17 @@ function betMoney(){
  * A button click event that will allow
  * a player to hold if they do not want another card
  */
-playerHold.addEventListener("click", function(){
-  isHold = true
-  dealerTurn(); 
-})
+playerHold.addEventListener("click", function () {
+  isHold = true;
+  dealerTurn();
+});
 
 /**
  * Generates a random number between 1 and 13
  * Assigns card images to the value of the generated number
  * Aces are assigned value of 11 if the generated value is 1
  * Face cards are assigned the value of 10 for any generated number 11 - 13
- * @returns An Array containing the random number to use for score keeing 
+ * @returns An Array containing the random number to use for score keeing
  * and the assigned card image
  */
 function getRandomCard() {
@@ -102,27 +101,33 @@ function getRandomCard() {
   }
 }
 
-function displayCards(){
-  playerCardsDisplayEl.innerHTML = ""; 
+function displayCards() {
+  playerCardsDisplayEl.innerHTML = "";
   for (let i = 0; i < cards.length; i++) {
     playerCardsDisplayEl.innerHTML +=
-      "<img src='images/cards/" + cards[i][1] + ".png' class='card' id='card"+i+"'/>";
-      rotateCards("card"+i);
+      "<img src='images/cards/" +
+      cards[i][1] +
+      ".png' class='card' id='card" +
+      i +
+      "'/>";
+    rotateCards("card" + i);
   }
-  dealerCardDisplayEl.innerHTML ="";
-  for(let j = 0; j < dealerCards.length; j++){
+  dealerCardDisplayEl.innerHTML = "";
+  for (let j = 0; j < dealerCards.length; j++) {
     dealerCardDisplayEl.innerHTML +=
-  "<img src='images/cards/" + dealerCards[j][1] + ".png' class='card' id='card"+j+"'/>";
-  rotateCards("card"+j);
+      "<img src='images/cards/" +
+      dealerCards[j][1] +
+      ".png' class='card' id='card" +
+      j +
+      "'/>";
+    rotateCards("card" + j);
   }
 }
-
 
 /**
  * Renders the game
  */
 function renderGame(message) {
-
   cardsEl.textContent = "Your cards: ";
   displayCards();
   dealerSumEl.textContent = "Dealers Points: " + dealerSum;
@@ -130,64 +135,57 @@ function renderGame(message) {
   messageEl.textContent = message;
 }
 
-newCardEl.addEventListener("click", function(){
-   let newCard = getRandomCard();
-   if (playerSum < 21){
-    if (isAlive && !hasBlackJack && !isHold ) {
-    playerSum += newCard[0];
-    cards.push(newCard);
-    renderGame();
+newCardEl.addEventListener("click", function () {
+  let newCard = getRandomCard();
+  if (playerSum < 21) {
+    if (isAlive && !hasBlackJack && !isHold) {
+      playerSum += newCard[0];
+      cards.push(newCard);
+      renderGame();
     }
-   }
-   playersTurn();
+  }
+  playersTurn();
 });
 
-function playersTurn(){
+function playersTurn() {
   message = "Do you want to draw another card?";
   if (playerSum > 21) {
     message = "Busted!";
     isAlive = false;
-  } 
-   if (playerSum === 21) {
+  }
+  if (playerSum === 21) {
     message = "BlackJack!";
     player.chips += betMoney() * 2;
     playerEl.textContent = player.name + ": $" + player.chips;
     hasBlackJack = true;
-  } 
-   renderGame(message);
-
+  }
+  renderGame(message);
 }
 /**
- * 
+ * Automatically runs when hold button is clicked
  */
-function dealerTurn(){
+function dealerTurn() {
   dealerSumEl.textContent = "Dealers Points: " + dealerSum;
   let newDealerCard;
-  if (isHold){
-  while (dealerSum < 21 ){
-    newDealerCard = getRandomCard();
-    dealerCards.push(newDealerCard);
-    dealerSum += newDealerCard[0];
- 
-  }
-  if (dealerSum > playerSum && dealerSum <= 21){
-    message = "Dealer Wins!"
-   
-  } else {
-    player.chips += betMoney() * 2;
-    message = player.name + " Wins!"
-  } 
+  if (isHold) {
+    while (dealerSum < 21) {
+      newDealerCard = getRandomCard();
+      dealerCards.push(newDealerCard);
+      dealerSum += newDealerCard[0];
+    }
+    if (dealerSum > playerSum && dealerSum <= 21) {
+      message = "Dealer Wins!";
+    } else {
+      player.chips += betMoney() * 2;
+      message = player.name + " Wins!";
+    }
     renderGame(message);
   }
-
 }
 
-function randomNum(min, max){
-return Math.random() * (max - min) + min;
-
+function rotateCards(cardId) {
+  let deg = Math.round(Math.random() * (20 - -20) + -20);
+  const card = (document.getElementById(
+    cardId
+  ).style.transform = `rotate(${deg}deg)`);
 }
-function rotateCards(cardId){
-  let deg = Math.floor(randomNum(-20, 20));
-  const card = document.getElementById(cardId).style.transform = 'rotate(' + deg + 'deg)';
-}
-
