@@ -107,7 +107,7 @@ function displayCards() {
     playerCardsDisplayEl.innerHTML +=
       "<img src='images/cards/" +
       cards[i][1] +
-      ".png' class='card' id='card" +
+      ".png' class='card' alt='playing card' id='card" +
       i +
       "'/>";
     rotateCards("card" + i);
@@ -117,7 +117,7 @@ function displayCards() {
     dealerCardDisplayEl.innerHTML +=
       "<img src='images/cards/" +
       dealerCards[j][1] +
-      ".png' class='card' id='card" +
+      ".png' class='card' alt='playing card' id='card" +
       j +
       "'/>";
     rotateCards("card" + j);
